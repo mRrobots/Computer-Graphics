@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Subroutine Hieararchy</title>
+
+    <script>
+      var canvas; // The canvas that is used as the drawing surface
+      var graphics; // The 2D graphics context for drawing on the canvas.
+
+      var X_LEFT = -4; // The xy limits for the coordinate system.
+      var X_RIGHT = 4;
+      var Y_BOTTOM = -3;
+      var Y_TOP = 3;
+
+      var BACKGROUND = "#adcbf7"; // The display is filled with this color before the scene is drawn.
+
+      var pixelSize; // The size of one pixel, in the transformed coordinates.
+
+      var frameNumber = 0; // Current frame number. goes up by one in each frame.
+
+      // TODO:  Define any other necessary state variables.
+
+      /**
+       *  Responsible for drawing the entire scene.  The display is filled with the background
+       *  color before this function is called.
+       */
+      function drawWorld() {
+        // TODO: Draw the content of the scene.
+        //creating object 1 and pass green color
+        graphics.save();
+        road();
+        graphics.restore();
+
+        graphics.save();
+        Mountains();
+        graphics.restore();
+
+        graphics.save();
+        yard();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(3, 0);
+        yard();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-1, -0.5);
+        graphics.scale(0.5, 0.5);
+        Tree();
+        graphics.restore();
+
+        graphics.save();
+        Electic();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-1.5, 0);
+        graphics.scale(0.5, 0.5);
+        Tree1();
+        graphics.restore();
+
+        graphics.save();
+        factory();
+        graphics.restore();
+
+        graphics.save();
+        place_Sun();
+        graphics.restore();
+
+        graphics.save();
+        movingCloud();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-2, 1.5);
+        graphics.scale(0.5, 0.5);
+        bird();
+        graphics.restore();
+
+        graphics.save();
+        movingT();
+        graphics.restore();
+      }
+
+      /**
+       * This method is called just before each frame is drawn.  It updates the modeling
+       * transformations of the objects in the scene that are animated.
+       */
+      function updateFrame() {
+        frameNumber++;
+        // TODO: If other updates are needed for the next frame, do them here.
+      }
+
+      // TODO: Define methods for drawing the objects in the scene.
+
+      //just a wheel,cool
+
+      function House() {
+        graphics.save();
+        graphics.scale(2, 1);
+        graphics.fillStyle = "#2b1e08";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, 0.05);
+        graphics.scale(0.7, 0.5);
+        graphics.fillStyle = "white";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, 0.25);
+        cool_line();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-0.3, 0);
+        graphics.rotate(Math.PI / 2);
+        graphics.scale(1, 1.5);
+        cool_line();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-0.75, -0.1);
+        graphics.scale(0.4, 0.8);
+        graphics.fillStyle = "white";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, 0.5);
+        graphics.scale(2, 0.5);
+        graphics.fillStyle = "#a6928a";
+        filledTriangle(graphics);
+        graphics.restore();
+      }
+
+      function chopedTrees() {
+        graphics.save();
+        graphics.beginPath();
+        graphics.moveTo(0, 0);
+        graphics.lineTo(0.05, -0.2);
+        graphics.lineTo(-0.1, -0.2);
+        graphics.lineTo(-0.05, 0);
+        graphics.fillStyle = "#916459";
+        graphics.fill();
+        graphics.stroke();
+        graphics.restore();
+      }
+
+      function factory() {
+        graphics.save();
+        graphics.translate(2, -0.5);
+        chopedTrees();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(3, -0.5);
+        chopedTrees();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(3.5, -0.9);
+        graphics.scale(1.3, 1);
+        chopedTrees();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(3.5, -0.3);
+        chopedTrees();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(3, 0);
+        graphics.scale(0.5, 0.5);
+        Tree1();
+        graphics.restore();
+      }
+
+      function yard() {
+        graphics.save();
+        graphics.beginPath();
+        graphics.moveTo(-4, 0);
+        graphics.lineTo(-2.5, 0);
+        graphics.lineTo(-0.9, -1);
+        graphics.lineTo(-4, -1);
+        graphics.stroke();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-3, 0);
+        graphics.scale(0.7, 0.7);
+        House();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-2, 0);
+        Tree();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-3.5, 0);
+        Tree1();
+        graphics.restore();
+      }
+
+      function road() {
+        graphics.save();
+        graphics.translate(0, -2);
+        graphics.scale(9, 1.5);
+        graphics.fillStyle = "#8a919c";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, -2);
+        graphics.scale(9, 0.025);
+        graphics.fillStyle = "white";
+        filledRect();
+        graphics.restore();
+      }
+
+      function Tree() {
+        graphics.save();
+        graphics.translate(0, -0.5);
+        graphics.scale(0.1, 0.4);
+        graphics.fillStyle = "#916459";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, 0.3);
+        graphics.scale(0.6, 0.5);
+        graphics.fillStyle = "green";
+        filledTriangle(graphics);
+        graphics.restore();
+
+        graphics.save();
+        graphics.scale(0.7, 0.5);
+        graphics.fillStyle = "green";
+        filledTriangle(graphics);
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, -0.3);
+        graphics.scale(0.8, 0.5);
+        graphics.fillStyle = "green";
+        filledTriangle(graphics);
+        graphics.restore();
+      }
+
+      function Tree1() {
+        graphics.save();
+        graphics.beginPath();
+        graphics.moveTo(0, 0);
+        graphics.lineTo(0.05, -0.5);
+        graphics.lineTo(-0.1, -0.5);
+        graphics.lineTo(-0.05, 0);
+        graphics.fillStyle = "#916459";
+        graphics.fill();
+        graphics.stroke();
+        graphics.restore();
+
+        graphics.save();
+        graphics.beginPath();
+        graphics.moveTo(0, 0);
+        graphics.lineTo(0.2, -0.02);
+        graphics.lineTo(0.5, 0.1);
+        graphics.lineTo(0.3, 0.3);
+        graphics.lineTo(0.35, 0.4);
+        graphics.lineTo(0, 0.7);
+        graphics.lineTo(-0.4, 0.3);
+        graphics.lineTo(-0.5, 0.2);
+        graphics.lineTo(-0.05, 0);
+        graphics.fillStyle = "green";
+        graphics.fill();
+        graphics.stroke();
+        graphics.restore();
+      }
+
+      function mywheel() {
+        graphics.save();
+        graphics.strokeStyle = "black";
+        filledCircle();
+        var n = 6;
+        var delta = Math.PI / n;
+        for (var i = 0; i < n; i++) {
+          line();
+          graphics.rotate(delta);
+        }
+        graphics.restore();
+
+        graphics.save();
+        graphics.scale(0.8, 0.8);
+        graphics.strokeStyle = "white";
+        filledCircle();
+        var n = 6;
+        var delta = Math.PI / n;
+        for (var i = 0; i < n; i++) {
+          line();
+          graphics.rotate(delta);
+        }
+        graphics.restore();
+      }
+
+      function movingW() {
+        graphics.save();
+        graphics.rotate((frameNumber * 3 * -Math.PI) / 1000);
+        mywheel();
+        graphics.restore();
+      }
+
+      function cool_line() {
+        graphics.save();
+        graphics.translate(0, -0.2);
+        graphics.scale(2, 0.5);
+        graphics.rotate(Math.PI / 2);
+        line();
+        graphics.restore();
+      }
+
+      function bird() {
+        graphics.save();
+        graphics.scale(0.2, 0.2);
+        filledCircle();
+        graphics.restore();
+
+        graphics.save();
+        cool_line();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, -0.1);
+        graphics.rotate(Math.PI / 4);
+        graphics.scale(1, 0.8);
+        cool_line();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, -0.1);
+        graphics.rotate(-Math.PI / 4);
+        graphics.scale(1, 0.8);
+        cool_line();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-0.18, -0.38);
+        graphics.scale(0.2, 0.15);
+        graphics.fillStyle = "#black";
+        filledTriangle(graphics);
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0.18, -0.38);
+        graphics.scale(0.2, 0.15);
+        graphics.fillStyle = "#black";
+        filledTriangle(graphics);
+        graphics.restore();
+      }
+
+      function Truck() {
+        graphics.save();
+        graphics.translate(-2, -2.5);
+        graphics.scale(0.4, 0.4);
+        movingW();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(1, -2.5);
+        graphics.scale(0.4, 0.4);
+        movingW();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(2.5, -2.5);
+        graphics.scale(0.4, 0.4);
+        movingW();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-0.5, -1.9);
+        graphics.scale(4, 1);
+        graphics.fillStyle = "#4d523a";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(2.3, -2);
+        graphics.scale(1, 0.6);
+        graphics.fillStyle = "#4d523a";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.beginPath();
+        graphics.moveTo(1.5, -1.7);
+        graphics.lineTo(1.8, -1.7);
+        graphics.lineTo(2, -0.8);
+        graphics.lineTo(2.5, -0.8);
+        graphics.lineTo(2.6, -1);
+        graphics.lineTo(2.6, -1.4);
+        graphics.lineTo(2.8, -1.7);
+        graphics.fillStyle = "#4d523a";
+        graphics.fill();
+        graphics.stroke();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(2.3, -1.2);
+        graphics.scale(0.6, 0.4);
+        graphics.fillStyle = "#4d523a";
+        filledRect();
+        graphics.restore();
+      }
+
+      function s_line() {
+        graphics.save();
+        graphics.beginPath();
+        graphics.moveTo(-4, 0);
+        graphics.lineTo(4, 0);
+        // graphics.fillStyle = "white";
+        graphics.fill();
+        graphics.stroke();
+        graphics.restore();
+      }
+
+      function Electic() {
+        graphics.save();
+        graphics.translate(-1.2, 0.1);
+        graphics.scale(0.1, 2.5);
+        graphics.fillStyle = "#916459";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(1.8, 0.1);
+        graphics.scale(0.1, 2.5);
+        graphics.fillStyle = "#916459";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, 1);
+        s_line();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, 0.9);
+        s_line();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0, 1.2);
+        s_line();
+        graphics.restore();
+      }
+
+      function T() {
+        graphics.save();
+        graphics.translate(-1, -2);
+        graphics.scale(0.4, 0.4);
+        movingW();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(1, -2);
+        graphics.scale(0.4, 0.4);
+        movingW();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-0.5, -1.2);
+        graphics.scale(2, 1.5);
+        graphics.fillStyle = "#9e9573";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(1, -1.65);
+        graphics.scale(1, 0.6);
+        graphics.fillStyle = "#36382c";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0.75, -1.1);
+        graphics.scale(0.5, 0.6);
+        graphics.fillStyle = "#36382c";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.beginPath();
+        graphics.moveTo(0.55, -1);
+        graphics.lineTo(1, -1);
+        graphics.lineTo(1.3, -1.35);
+        graphics.lineTo(0.55, -1.35);
+        graphics.fillStyle = "white";
+        graphics.fill();
+        graphics.stroke();
+        graphics.restore();
+      }
+      function Sun() {
+        graphics.save();
+        graphics.strokeStyle = "red";
+        var n = 6;
+        var delta = Math.PI / n;
+        for (var i = 0; i < n; i++) {
+          line();
+          graphics.rotate(delta);
+        }
+        graphics.save();
+        graphics.scale(0.8, 0.8);
+        graphics.stroke();
+        graphics.fillStyle = "yellow";
+        filledCircle();
+        graphics.strokeStyle = "red";
+        graphics.stroke();
+        graphics.restore();
+        graphics.restore();
+      }
+
+      function place_Sun() {
+        graphics.save();
+        graphics.translate(3, 2.3);
+        graphics.rotate((frameNumber * 2 * Math.PI) / 1000);
+        Sun();
+        graphics.restore();
+      }
+
+      function Clouds1() {
+        graphics.save();
+        graphics.scale(1, 1.5);
+        graphics.fillStyle = "white";
+        filledCircle();
+        graphics.restore();
+
+        graphics.save();
+        graphics.scale(1, 0.7);
+        graphics.translate(0.5, 0.8);
+        graphics.fillStyle = "white";
+        filledCircle();
+        graphics.restore();
+
+        graphics.save();
+        graphics.scale(0.7, 0.7);
+        graphics.translate(0.5, 0.8);
+        graphics.fillStyle = "white";
+        filledCircle();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(0.8, 0);
+        graphics.fillStyle = "white";
+        filledCircle();
+        graphics.restore();
+      }
+
+      function Cloud0() {
+        graphics.save();
+        graphics.translate(-0.6, -0.1);
+        graphics.scale(0.7, 0.5);
+        graphics.fillStyle = "white";
+        filledRect();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-0.5, -0.05);
+        graphics.scale(0.5, 0.5);
+        Clouds1();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-1, 0);
+        graphics.scale(0.5, 0.5);
+        Clouds1();
+        graphics.restore();
+      }
+
+      function Clouds() {
+        graphics.save();
+        graphics.translate(0, 2);
+        Cloud0();
+        graphics.restore();
+
+        graphics.save();
+        graphics.translate(-3.5, 2);
+        graphics.scale(0.5, 0.5);
+        Clouds1();
+        graphics.restore();
+      }
+
+      function movingCloud() {
+        graphics.save();
+        // graphics.translate(frameNumber * 0.005, 0);
+        graphics.translate(-3 + (13 * (frameNumber % 300)) / 300.0, 0);
+        Clouds();
+        graphics.restore();
+      }
+
+      function movingT() {
+        graphics.save();
+        graphics.translate(-6 + ((frameNumber % 400) / 400) * 12, 0);
+        // graphics.translate(((frameNumber % 100) / 100) * canvas.width, 0);
+        T();
+        graphics.restore();
+      }
+
+      function Mountains() {
+        graphics.save();
+        graphics.beginPath();
+        graphics.moveTo(-4, 0);
+        graphics.lineTo(-3, 1);
+        graphics.lineTo(-2, 0.5);
+        graphics.lineTo(-1, 1);
+        graphics.lineTo(0, 2);
+        graphics.lineTo(0.2, 1);
+        graphics.lineTo(1, 1.5);
+        graphics.lineTo(2, 0.5);
+        graphics.lineTo(4, 0);
+        graphics.fillStyle = "#20522b";
+        graphics.fill();
+        graphics.stroke();
+        graphics.restore();
+      }
+
+      function rotatingRect() {
+        // (DELETE THIS EXAMPLE)
+        graphics.save(); // (It might be necessary to save/restore transform and color)
+        graphics.fillStyle = "black";
+        graphics.rotate((frameNumber * 0.75 * Math.PI) / 180);
+        graphics.scale(2, 2);
+        filledRect();
+        graphics.restore();
+      }
+
+      //------------------- Some methods for drawing basic shapes. ----------------
+
+      function line() {
+        // Draws a line from (-0.5,0) to (0.5,0)
+        graphics.beginPath();
+        graphics.moveTo(-0.5, 0);
+        graphics.lineTo(0.5, 0);
+        graphics.stroke();
+      }
+
+      function rect() {
+        // Strokes a square, size = 1, center = (0,0)
+        graphics.strokeRect(-0.5, -0.5, 1, 1);
+      }
+
+      function filledRect() {
+        // Fills a square, size = 1, center = (0,0)
+        graphics.fillRect(-0.5, -0.5, 1, 1);
+      }
+
+      function circle() {
+        // Strokes a circle, diameter = 1, center = (0,0)
+        graphics.beginPath();
+        graphics.arc(0, 0, 0.5, 0, 2 * Math.PI);
+        graphics.stroke();
+      }
+
+      function filledCircle() {
+        // Fills a circle, diameter = 1, center = (0,0)
+        graphics.beginPath();
+        graphics.arc(0, 0, 0.5, 0, 2 * Math.PI);
+        graphics.fill();
+      }
+
+      function filledTriangle(g2) {
+        // Filled Triangle, width 1, height 1, center of base at (0,0)
+        g2.beginPath();
+        g2.moveTo(-0.5, 0);
+        g2.lineTo(0.5, 0);
+        g2.lineTo(0, 1);
+        g2.closePath();
+        g2.fill();
+      }
+
+      // ------------------------------- graphics support functions --------------------------
+
+      /**
+       * Draw one frame of the animation.  Probably doesn't need to be changed,
+       * except maybe to change the setting of preserveAspect in applyLimits().
+       */
+      function draw() {
+        graphics.save(); // to make sure changes don't carry over from one call to the next
+        graphics.fillStyle = BACKGROUND; // background color
+        graphics.fillRect(0, 0, canvas.width, canvas.height);
+        graphics.fillStyle = "black";
+        applyLimits(graphics, X_LEFT, X_RIGHT, Y_TOP, Y_BOTTOM, false);
+        graphics.lineWidth = pixelSize; // Use 1 pixel as the default line width
+        drawWorld();
+        graphics.restore();
+      }
+
+      /**
+       * Applies a coordinate transformation to the graphics context, to map
+       * xleft,xright,ytop,ybottom to the edges of the canvas.  This is called
+       * by draw().  This does not need to be changed.
+       */
+      function applyLimits(g, xleft, xright, ytop, ybottom, preserveAspect) {
+        var width = canvas.width; // The width of this drawing area, in pixels.
+        var height = canvas.height; // The height of this drawing area, in pixels.
+        if (preserveAspect) {
+          // Adjust the limits to match the aspect ratio of the drawing area.
+          var displayAspect = Math.abs(height / width);
+          var requestedAspect = Math.abs((ybottom - ytop) / (xright - xleft));
+          var excess;
+          if (displayAspect > requestedAspect) {
+            excess = (ybottom - ytop) * (displayAspect / requestedAspect - 1);
+            ybottom += excess / 2;
+            ytop -= excess / 2;
+          } else if (displayAspect < requestedAspect) {
+            excess = (xright - xleft) * (requestedAspect / displayAspect - 1);
+            xright += excess / 2;
+            xleft -= excess / 2;
+          }
+        }
+        var pixelWidth = Math.abs((xright - xleft) / width);
+        var pixelHeight = Math.abs((ybottom - ytop) / height);
+        pixelSize = Math.min(pixelWidth, pixelHeight);
+        g.scale(width / (xright - xleft), height / (ybottom - ytop));
+        g.translate(-xleft, -ytop);
+      }
+
+      //------------------ Animation framework ------------------------------
+
+      var running = false; // This is set to true when animation is running
+
+      function frame() {
+        if (running) {
+          // Draw one frame of the animation, and schedule the next frame.
+          updateFrame();
+          draw();
+          requestAnimationFrame(frame);
+        }
+      }
+
+      function doAnimationCheckbox() {
+        var shouldRun = document.getElementById("animateCheck").checked;
+        if (shouldRun != running) {
+          running = shouldRun;
+          if (running) requestAnimationFrame(frame);
+        }
+      }
+
+      //----------------------- initialization -------------------------------
+
+      function init() {
+        canvas = document.getElementById("thecanvas");
+        if (!canvas.getContext) {
+          document.getElementById("message").innerHTML =
+            "ERROR: Canvas not supported";
+          return;
+        }
+        graphics = canvas.getContext("2d");
+        document.getElementById("animateCheck").checked = false;
+        document.getElementById("animateCheck").onchange = doAnimationCheckbox;
+        draw();
+      }
+    </script>
+  </head>
+
+  <body onload="init()" style="background-color: #eeeeee">
+    <h3>Subroutine Hierarchy</h3>
+
+    <noscript>
+      <p>
+        <b style="color: red"
+          >Error: This page requires JavaScript, but it is not available.</b
+        >
+      </p>
+    </noscript>
+
+    <p id="message">
+      <label
+        ><input type="checkbox" id="animateCheck" /><b
+          >Run the Animation</b
+        ></label
+      >
+    </p>
+
+    <div style="float: left; border: 2px solid black">
+      <canvas
+        id="thecanvas"
+        width="800"
+        height="600"
+        style="display: block"
+      ></canvas>
+    </div>
+  </body>
+</html>
